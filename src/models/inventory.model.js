@@ -28,12 +28,12 @@ const Inventory = db.define('inventory',{
     },
     purchasePrice:{
         allowNull:false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         field: 'purchase_price'
     },
     salePrice:{
         allowNull:false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         field: 'sale_price'
     }
 })

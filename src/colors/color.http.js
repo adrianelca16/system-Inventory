@@ -3,7 +3,7 @@ const colorControllers = require('./color.controllers')
 const getAll = (req, res)=>{
     colorControllers.getAllColor()
     .then(response => {
-        return res.status(200).json({items: response.length, Colors: response})
+        return res.status(200).json({items: response.length, colors: response})
     })
     .catch(err => {
         return res.status(400).json({message: err})

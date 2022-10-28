@@ -23,17 +23,19 @@ require('./middleware/auth.middleware')(passport)
  
 //! configuraciones iniciales
 const app = express()
-const fecha = new Date()
+const cors = require('cors')
+
 
 
 
 db.authenticate()
     .then(()=> console.log('database authenticated'))
     .catch(err=> console.log(err))
-db.sync()
+db.sync({force:true})
     .then(()=> {
         console.log('Database synced')
         initModels()
+        defaulData()
     })
     .catch(err => console.log(err))
 app.use(express.json())
@@ -41,7 +43,8 @@ app.use(express.json())
 app.get('/', (req, res) => {
     res.status(200).json({message: 'All ok!'})
 })
-app.use('/api/v1/users', userRouter)
+app.use(cors({origin: 'http://127.0.0.1:5173'}))
+app.use('/api/v1/users',userRouter)
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/color', colorRouter)
 app.use('/api/v1/inventory', inventoryRouter)
